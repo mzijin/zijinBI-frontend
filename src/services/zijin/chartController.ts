@@ -2,7 +2,7 @@
 /* eslint-disable */
 import { request } from '@umijs/max';
 
-/** addChart POST /api/chart/add */
+/** 创建图表 POST /api/chart/add */
 export async function addChartUsingPOST(
   body: API.ChartAddRequest,
   options?: { [key: string]: any },
@@ -17,7 +17,7 @@ export async function addChartUsingPOST(
   });
 }
 
-/** deleteChart POST /api/chart/delete */
+/** 删除图表 POST /api/chart/delete */
 export async function deleteChartUsingPOST(
   body: API.DeleteRequest,
   options?: { [key: string]: any },
@@ -32,7 +32,7 @@ export async function deleteChartUsingPOST(
   });
 }
 
-/** editChart POST /api/chart/edit */
+/** 编辑图表 POST /api/chart/edit */
 export async function editChartUsingPOST(
   body: API.ChartEditRequest,
   options?: { [key: string]: any },
@@ -47,7 +47,7 @@ export async function editChartUsingPOST(
   });
 }
 
-/** genChartByAi POST /api/chart/gen */
+/** 同步图表文件上传 POST /api/chart/gen */
 export async function genChartByAiUsingPOST(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.genChartByAiUsingPOSTParams,
@@ -65,10 +65,15 @@ export async function genChartByAiUsingPOST(
     const item = (body as any)[ele];
 
     if (item !== undefined && item !== null) {
-      formData.append(
-        ele,
-        typeof item === 'object' && !(item instanceof File) ? JSON.stringify(item) : item,
-      );
+      if (typeof item === 'object' && !(item instanceof File)) {
+        if (item instanceof Array) {
+          item.forEach((f) => formData.append(ele, f || ''));
+        } else {
+          formData.append(ele, JSON.stringify(item));
+        }
+      } else {
+        formData.append(ele, item);
+      }
     }
   });
 
@@ -83,7 +88,7 @@ export async function genChartByAiUsingPOST(
   });
 }
 
-/** genChartByAiAsync POST /api/chart/gen/Async */
+/** 异步线程池图表文件上传 POST /api/chart/gen/Async */
 export async function genChartByAiAsyncUsingPOST(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.genChartByAiAsyncUsingPOSTParams,
@@ -101,10 +106,15 @@ export async function genChartByAiAsyncUsingPOST(
     const item = (body as any)[ele];
 
     if (item !== undefined && item !== null) {
-      formData.append(
-        ele,
-        typeof item === 'object' && !(item instanceof File) ? JSON.stringify(item) : item,
-      );
+      if (typeof item === 'object' && !(item instanceof File)) {
+        if (item instanceof Array) {
+          item.forEach((f) => formData.append(ele, f || ''));
+        } else {
+          formData.append(ele, JSON.stringify(item));
+        }
+      } else {
+        formData.append(ele, item);
+      }
     }
   });
 
@@ -119,7 +129,7 @@ export async function genChartByAiAsyncUsingPOST(
   });
 }
 
-/** genChartByAiAsyncMq POST /api/chart/gen/Async/mq */
+/** 消息队列mq 异步图表文件上传 POST /api/chart/gen/Async/mq */
 export async function genChartByAiAsyncMqUsingPOST(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.genChartByAiAsyncMqUsingPOSTParams,
@@ -137,10 +147,15 @@ export async function genChartByAiAsyncMqUsingPOST(
     const item = (body as any)[ele];
 
     if (item !== undefined && item !== null) {
-      formData.append(
-        ele,
-        typeof item === 'object' && !(item instanceof File) ? JSON.stringify(item) : item,
-      );
+      if (typeof item === 'object' && !(item instanceof File)) {
+        if (item instanceof Array) {
+          item.forEach((f) => formData.append(ele, f || ''));
+        } else {
+          formData.append(ele, JSON.stringify(item));
+        }
+      } else {
+        formData.append(ele, item);
+      }
     }
   });
 
@@ -155,7 +170,7 @@ export async function genChartByAiAsyncMqUsingPOST(
   });
 }
 
-/** getChartById GET /api/chart/get */
+/** 根据Id获取图表 GET /api/chart/get */
 export async function getChartByIdUsingGET(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.getChartByIdUsingGETParams,
@@ -170,7 +185,7 @@ export async function getChartByIdUsingGET(
   });
 }
 
-/** listChartByPage POST /api/chart/list/page */
+/** 分页获取图表 POST /api/chart/list/page */
 export async function listChartByPageUsingPOST(
   body: API.ChartQueryRequest,
   options?: { [key: string]: any },
@@ -185,7 +200,7 @@ export async function listChartByPageUsingPOST(
   });
 }
 
-/** listMyChartByPage POST /api/chart/my/list/page */
+/** 获取我的图表 POST /api/chart/my/list/page */
 export async function listMyChartByPageUsingPOST(
   body: API.ChartQueryRequest,
   options?: { [key: string]: any },
@@ -200,7 +215,7 @@ export async function listMyChartByPageUsingPOST(
   });
 }
 
-/** updateChart POST /api/chart/update */
+/** 管理员更新图表信息 POST /api/chart/update */
 export async function updateChartUsingPOST(
   body: API.ChartUpdateRequest,
   options?: { [key: string]: any },

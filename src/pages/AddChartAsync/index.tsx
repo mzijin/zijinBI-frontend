@@ -1,9 +1,10 @@
-import {genChartByAiAsyncMqUsingPOST, genChartByAiAsyncUsingPOST} from '@/services/zijin/chartController';
+import { genChartByAiAsyncMqUsingPOST } from '@/services/zijin/chartController';
 import { UploadOutlined } from '@ant-design/icons';
 import { Button, Card, Form, Input, message, Select, Space, Upload } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 import TextArea from 'antd/es/input/TextArea';
 import React, { useState } from 'react';
+import { CHART_TYPE_SELECT } from '@/constants';
 
 /**
  * 添加图表（异步）页面
@@ -66,15 +67,7 @@ const AddChartAsync: React.FC = () => {
             <Input placeholder="请输入图表名称" />
           </Form.Item>
           <Form.Item name="chartType" label="图表类型">
-            <Select
-              options={[
-                { value: '折线图', label: '折线图' },
-                { value: '柱状图', label: '柱状图' },
-                { value: '堆叠图', label: '堆叠图' },
-                { value: '饼图', label: '饼图' },
-                { value: '雷达图', label: '雷达图' },
-              ]}
-            />
+            <Select options={CHART_TYPE_SELECT} />
           </Form.Item>
           <Form.Item name="file" label="原始数据">
             <Upload name="file" maxCount={1}>

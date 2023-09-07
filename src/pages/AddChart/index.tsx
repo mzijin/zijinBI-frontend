@@ -1,9 +1,23 @@
 import { genChartByAiUsingPOST } from '@/services/zijin/chartController';
 import { UploadOutlined } from '@ant-design/icons';
-import {Button, Card, Col, Divider, Form, Input, message, Row, Select, Space, Spin, Upload} from 'antd';
+import {
+  Button,
+  Card,
+  Col,
+  Divider,
+  Form,
+  Input,
+  message,
+  Row,
+  Select,
+  Space,
+  Spin,
+  Upload,
+} from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import React, { useState } from 'react';
 import ReactECharts from 'echarts-for-react';
+import { CHART_TYPE_SELECT } from '@/constants';
 
 /**
  * 添加图表页面
@@ -39,7 +53,7 @@ const AddChart: React.FC = () => {
         message.success('分析成功');
         const chartOption = JSON.parse(res.data.genChart ?? '');
         if (!chartOption) {
-          throw new Error('图表代码解析错误')
+          throw new Error('图表代码解析错误');
         } else {
           setChart(res.data);
           setOption(chartOption);
@@ -56,10 +70,15 @@ const AddChart: React.FC = () => {
       <Row gutter={24}>
         <Col span={12}>
           <Card title="智能分析">
-            <Form name="addChart" labelAlign="left" labelCol={{ span: 4 }}
-                  wrapperCol={{ span: 16 }} onFinish={onFinish} initialValues={{}}>
-              <Form.Item
-                name="goal" label="分析目标">
+            <Form
+              name="addChart"
+              labelAlign="left"
+              labelCol={{ span: 4 }}
+              wrapperCol={{ span: 16 }}
+              onFinish={onFinish}
+              initialValues={{}}
+            >
+              <Form.Item name="goal" label="分析目标">
                 {/*展示虛字符，用于提醒用戶*/}
                 <TextArea placeholder="请输入你的分析需求，比如：分析网站用户的增长情况" />
               </Form.Item>
@@ -67,15 +86,7 @@ const AddChart: React.FC = () => {
                 <Input placeholder="请输入图表名称" />
               </Form.Item>
               <Form.Item name="chartType" label="图表类型">
-                <Select
-                  options={[
-                    { value: '折线图', label: '折线图' },
-                    { value: '柱状图', label: '柱状图' },
-                    { value: '堆叠图', label: '堆叠图' },
-                    { value: '饼图', label: '饼图' },
-                    { value: '雷达图', label: '雷达图' },
-                  ]}
-                />
+                <Select options={CHART_TYPE_SELECT} />
               </Form.Item>
               <Form.Item name="file" label="原始数据">
                 <Upload name="file" maxCount={1}>
@@ -85,7 +96,12 @@ const AddChart: React.FC = () => {
 
               <Form.Item wrapperCol={{ span: 16, offset: 4 }}>
                 <Space>
-                  <Button type="primary" htmlType="submit" loading={submitting} disabled={submitting}>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    loading={submitting}
+                    disabled={submitting}
+                  >
                     提交
                   </Button>
                   <Button htmlType="reset">重置</Button>
@@ -97,14 +113,12 @@ const AddChart: React.FC = () => {
         <Col span={12}>
           <Card title="分析结论">
             {chart?.genResult ?? <div>请先在左侧进行提交</div>}
-            <Spin spinning={submitting}/>
+            <Spin spinning={submitting} />
           </Card>
           <Divider />
           <Card title="可视化图表">
-            {
-              option ? <ReactECharts option={option} /> : <div>请先在左侧进行提交</div>
-            }
-            <Spin spinning={submitting}/>
+            {option ? <ReactECharts option={option} /> : <div>请先在左侧进行提交</div>}
+            <Spin spinning={submitting} />
           </Card>
         </Col>
       </Row>

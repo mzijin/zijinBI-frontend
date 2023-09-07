@@ -2,6 +2,7 @@ import { GithubOutlined } from '@ant-design/icons';
 import { DefaultFooter } from '@ant-design/pro-components';
 import '@umijs/max';
 import React from 'react';
+import { WELCOME, XUXI } from '@/constants';
 const Footer: React.FC = () => {
   const defaultMessage = '深信大数据出品';
   const currentYear = new Date().getFullYear();
@@ -10,24 +11,29 @@ const Footer: React.FC = () => {
       style={{
         background: 'none',
       }}
-      copyright={`${currentYear} ${defaultMessage}`}
+      // @ts-ignore
+      copyright={
+        <>
+          {currentYear} {defaultMessage}{' '}
+        </>
+      }
       links={[
         {
-          key: '智能BI',
-          title: '智能BI',
-          href: 'https://pro.ant.design',
+          key: '欢迎你加入星球 ',
+          title: '学习圈子',
+          href: XUXI,
+          blankTarget: true,
+        },
+        {
+          key: '#青青子衿博客#',
+          title: '#青青子衿博客# ',
+          href: WELCOME,
           blankTarget: true,
         },
         {
           key: 'github',
           title: <GithubOutlined />,
-          href: 'https://github.com/ant-design/ant-design-pro',
-          blankTarget: true,
-        },
-        {
-          key: '智能BI',
-          title: '智能BI',
-          href: 'https://ant.design',
+          href: 'https://github.com/mzijin',
           blankTarget: true,
         },
       ]}
