@@ -55,8 +55,16 @@ export const CHART_TYPE_SELECT = [
  * 默认头像
  */
 export const DEFAULT_AVATAR_URL =
-  'https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/56d6f5ad1d8747f484d6c2666b5a7961~tplv-k3u1fbpfcp-zoom-crop-mark:1512:1512:1512:851.awebp?';
-
+  'https://yupi.icu/logo.png';
+/**
+ * 提供给用户选择的头像
+ */
+export const selectAvatarUrl=
+    [{
+      value:
+        'https://yupi.icu/logo.png',
+      label: '默认头像',
+    }]
 export const selectGender = [
   { value: '男', label: '男' },
   { value: '女', label: '女' },
@@ -72,3 +80,5 @@ export const selectUserRole = [
 ];
 export const WELCOME = 'https://blog.csdn.net/m0_70638653?spm=1000.2115.3001.5343';
 export const XUXI = 'https://yupi.icu/';
+
+export const  URL='http://localhost:8080'

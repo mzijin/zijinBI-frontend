@@ -1,9 +1,9 @@
-import { selectGender } from '@/constants';
+import {selectAvatarUrl, selectGender} from '@/constants';
 import {
   getLoginUserUsingGET,
   getUserVOByIdUsingGET,
-  updateUserUsingPOST,
   updateMyUserUsingPOST,
+  updateByProfileUserUsingPOST,
 } from '@/services/zijin/userController';
 import { useModel } from '@@/exports';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
@@ -81,7 +81,6 @@ const UserInfo: React.FC = () => {
 
     fetchData();
   }, []);
-
   const [data, setData] = useState<API.UserVO>({});
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
@@ -109,7 +108,7 @@ const UserInfo: React.FC = () => {
   const updateUserAvatar = async (id: any, userAvatar: any) => {
     // 更新用户头像
     console.log(id, userAvatar);
-    const res = await updateUserUsingPOST({
+    const res = await updateByProfileUserUsingPOST({
       id: id,
       userAvatar: userAvatar,
     });
@@ -304,6 +303,22 @@ const UserInfo: React.FC = () => {
             label="修改我的编码"
             placeholder="输入修改后的编码"
             initialValue={myUser.userCode}
+          />
+          <ProFormSelect
+            name="userAvatar"
+            fieldProps={{
+              size: 'large',
+            }}
+            label="修改头像"
+            options={selectAvatarUrl}
+            placeholder={'请选择用户头像 '}
+            initialValue={myUser.userAvatar}
+            rules={[
+              {
+                required: true,
+                message: '请输入选择用户头像!',
+              },
+            ]}
           />
         </ProForm.Group>
       </ModalForm>

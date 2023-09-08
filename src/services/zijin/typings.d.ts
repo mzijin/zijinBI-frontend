@@ -333,10 +333,6 @@ declare namespace API {
     userId?: number;
   };
 
-  type uploadFileUsingPOSTParams = {
-    biz?: string;
-  };
-
   type User = {
     createTime?: string;
     email?: string;
@@ -397,7 +393,6 @@ declare namespace API {
   type UserUpdateMyRequest = {
     email?: string;
     gender?: string;
-    id?: number;
     phone?: string;
     userAccount?: string;
     userAvatar?: string;
@@ -408,10 +403,13 @@ declare namespace API {
   };
 
   type UserUpdateRequest = {
+    createTime?: string;
     email?: string;
     gender?: string;
     id?: number;
+    isDelete?: number;
     phone?: string;
+    updateTime?: string;
     userAccount?: string;
     userAvatar?: string;
     userCode?: string;
