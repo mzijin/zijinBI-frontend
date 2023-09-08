@@ -1,5 +1,5 @@
 # 智能 BI数据分析平台
-## 具体页面效果请看后端项目的的README.MD：https://github.com/mzijin/zijinBI-backend
+## 具体页面效果请看后端项目的的README.MD：<a href="https://github.com/mzijin/zijinBI-backend?spm=1000.2115.3001.5343" rel="nofollow">叫我小陈就行</a>
 This project is initialized with [智能 BI数据分析平台](https://pro.ant.design). Follow is the quick guide for how to use.
 
 ## Environment Prepare
